@@ -19,10 +19,11 @@ namespace DesktopAPI.Services
                 {
                     var disk = new DiskInfo();
                     const int tbFactor = 1073741824;
-                    disk.Letter = obj.Properties.Where(p => p.Name.Equals("Name")).FirstOrDefault().Value.ToString();
-                    disk.Name = obj.Properties.Where(p => p.Name.Equals("VolumeName")).FirstOrDefault().Value.ToString();
-                    disk.Size = Convert.ToSingle((ulong) obj.Properties.Where(p => p.Name.Equals("Size")).FirstOrDefault().Value / tbFactor);
-                    disk.FreeSpace = Convert.ToSingle((ulong) obj.Properties.Where(p => p.Name.Equals("FreeSpace")).FirstOrDefault().Value / tbFactor);
+
+                    disk.Letter = obj.Properties.FirstOrDefault(p => p.Name.Equals("Name", StringComparison.Ordinal))?.Value.ToString();
+                    disk.Name = obj.Properties.FirstOrDefault(p => p.Name.Equals("VolumeName", StringComparison.Ordinal))?.Value.ToString();
+                    disk.Size = Convert.ToSingle((ulong) obj.Properties.FirstOrDefault(p => p.Name.Equals("Size", StringComparison.Ordinal))?.Value! / tbFactor);
+                    disk.FreeSpace = Convert.ToSingle((ulong) obj.Properties.FirstOrDefault(p => p.Name.Equals("FreeSpace", StringComparison.Ordinal))?.Value! / tbFactor);
                     disks.Add(disk);
                 }
             }

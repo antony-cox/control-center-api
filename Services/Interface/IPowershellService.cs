@@ -6,5 +6,6 @@ namespace DesktopAPI.Services
     {
         Task Shutdown();
         Task<IEnumerable<DiskInfo>> GetDiskInfo(); 
+        Task StartApp(string path);
     }
 }

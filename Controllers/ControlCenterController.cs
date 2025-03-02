@@ -47,4 +47,20 @@ public class ControlCenterController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
+
+    [HttpPost]
+    [Route("ControlCenter/StartPlex")]
+    public async Task<IActionResult> StartPlex()
+    {
+        try
+        {
+            await _powershellService.StartApp(Constants.PLEXPATH);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Error in {ControllerContext.ActionDescriptor.ActionName}: {ex}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
 }

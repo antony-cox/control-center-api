@@ -36,6 +36,12 @@ namespace DesktopAPI.Services
             return Task.FromResult(0);
         }
 
+        public Task StartApp(string path)
+        {
+            var result =  RunScript($"Start-Process {path}");
+            return Task.FromResult(0);
+        }
+
         private async Task<PSDataCollection<PSObject>?> RunScript(string script)
         {
             using (PowerShell ps = PowerShell.Create())
